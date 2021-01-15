@@ -2362,6 +2362,99 @@ layout: post
 * what's the difference between calling new and create?
 
 ---
+title: Orm Review
+layout: post
+---
+
+# <a id="orms-review">ruby-orm-review</a>
+
+## Bringing It All Together
+
+### SWBATs
+
+### Resources
+
+### Example Video
+
+### Outline
+
+Title: Bringing It All Together Creator: Niky Morgan &lt;@nikymorg&gt; Type: Review
+
+## Goals
+
+This lab is about connecting our database to our Ruby code. Our goal is for them to talk to each other and share information.
+
+### Methods
+
+For each method ask
+
+* is it a class or instance method
+* what does it do
+
+Class methods deal with all instances of a class. Aren't tied to a specific instance.
+
+Instance methods affect only one instance at a time
+
+#### create table, drop table
+
+* class method
+* creates table only if it does not already exist
+
+`DB[:conn].execute(sql)`
+
+* creates a new database extension
+* executes the code we pass it
+* execute method comes from the sqlite3 gem
+
+#### save
+
+* instance method
+
+  Two cases:
+
+* object exists in db
+  * save any updates to db
+* object does not exist
+  * insert new row
+* return self for both cases
+
+#### create
+
+* class method
+* given attributes, make a dog and save it
+
+#### find by id
+
+* class method
+* sql search with id
+* create new dog instance from row
+
+#### find or create by
+
+* class method
+* given attributes, find in database or create new one
+* test if it is in database
+* instantiate
+
+#### new from db
+
+* class method
+* multiple assignments
+* create instance off row
+* small, reusable method
+
+#### find by name
+
+* find by id with name
+
+#### update
+
+* instance method
+* change db based on instance values
+
+
+
+---
 title: Orms Custom Dynamic
 layout: post
 ---
