@@ -14,7 +14,7 @@ title: React Intro
 layout: post
 ---
 
-# <a id="intro>Intro To React</a>
+# <a id="intro">Intro To React</a>
 
 ## SWBATs
 
