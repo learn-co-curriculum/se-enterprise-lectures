@@ -1,7 +1,7 @@
 ### Phase 4
 
 - [Rails Intro](#intro)
-- [Rails Associations](#associations)
+- [Rails Associations](#forms)
 - [Rails Forms REST](#forms-rest)
 - [Rails Forms Associations](#forms-associations)
 - [Rails Forms Validations](#forms-validations)
