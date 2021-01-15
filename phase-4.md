@@ -418,107 +418,6 @@ Then show them the RAILS WAY™️
 
 Be sure to _break_ the collection select and replace each of the arguments and show how they change the params
 
-# <a id="forms">ActiveRecord Validations
-
-## Objectives
-
-
-By the end of this lecture students should feel more comfortable with working with forms. This is a good opportunity to go over the creation of forms using `form_for`
-
-Why do we use Validations? Because users suck
-
-![](https://media.giphy.com/media/ZfU11ODanloCA/giphy.gif)
-
-## Resources
-Starter Code: https://github.com/learn-co-students/web-103017/tree/master/13_rails_forms/docoffice
-Video: https://youtu.be/73fjjOpH6uM
-
-## Steps
-
-
-### Introduction (20 mins)
-
-Set up a project with full built out CRUD/Restful actions. `index`, `show` actions can be covered very quickly. Spend time working through `new` and `create`. Illustrate the problem of bad input. We want a student to see that if we do not fill out information it is easy to create a form. Additionally if you build out `edit` and `update` they will see how easy it is to change the data.
-
-*Note* This is a good oppurtunity to talk about the various levels of validation. Frontend Validation i.e Forms themselves, Validation in code, Database Contraint.
-
-
-### Validations (25 mins)
-
-Spend the rest of the time showing students how they can write validations in their models which will prevent the creation of a project without the validations passing.
-
-For example
-
-```
-
-# dog.rb
-
-class Dog
-  validates :breed, presence: true
-end
-
-
-# dogs_controller.rb
-
-
-def create
-
-  @dog = Dog.new(name: params[:name], breed: params[:breed])
-  if @dog.valid?
-    @dog.save
-    redirect_to dog_path(@dog)
-  else
-    # Flash allows you to display errors on the page
-    # It persists from one request to the next
-
-    flash[:errors] = @dog.errors.full_messages # gives you an array of error messages corresponding to the validations 9
-
-  end
-
-end
-
-
-# OR
-
-
-def create
-
-  @dog = Dog.new(name: params[:name], breed: params[:breed])
-  if @dog.save
-    @dog.save
-  else
-
-    flash[:errors] = @dog.errors.full_messages
-  end
-
-end
-```
-
-*Note* Walk students through a couple of the validations on the Rails Guides documentation and show them how to try new ones. It is helpful for them to see how easy this is. Reiterate that this not something you simply memorize but something you work on and get practice with.
-
-
-### Strong params
-
-This lecture is also a good opportunity to dive into strong params. Because of issues with mass assignment Rails does not allow you to initialize with params therefore you must use strong params
-
-
-```
-  def create
-    # Include validation...
-    @dog = Dog.create(dog_params)
-  end
-
-private
-  def dog_params
-    params.require(:dog).permit(:name, :breed)
-  end
-
-```
-It could also be cool to show students how the return of `dog_params`. Rails changes the params to `permitted:true`
-
-## References
- * [Railsguides - AR Validations](http://guides.rubyonrails.org/active_record_validations.html)
-
  ---
 title: Rails Forms Rest
 layout: post
@@ -743,7 +642,107 @@ class DoctorController < ApplicationController
 end
 ```
 
+# <a id="forms">ActiveRecord Validations
 
+## Objectives
+
+
+By the end of this lecture students should feel more comfortable with working with forms. This is a good opportunity to go over the creation of forms using `form_for`
+
+Why do we use Validations? Because users suck
+
+![](https://media.giphy.com/media/ZfU11ODanloCA/giphy.gif)
+
+## Resources
+Starter Code: https://github.com/learn-co-students/web-103017/tree/master/13_rails_forms/docoffice
+Video: https://youtu.be/73fjjOpH6uM
+
+## Steps
+
+
+### Introduction (20 mins)
+
+Set up a project with full built out CRUD/Restful actions. `index`, `show` actions can be covered very quickly. Spend time working through `new` and `create`. Illustrate the problem of bad input. We want a student to see that if we do not fill out information it is easy to create a form. Additionally if you build out `edit` and `update` they will see how easy it is to change the data.
+
+*Note* This is a good oppurtunity to talk about the various levels of validation. Frontend Validation i.e Forms themselves, Validation in code, Database Contraint.
+
+
+### Validations (25 mins)
+
+Spend the rest of the time showing students how they can write validations in their models which will prevent the creation of a project without the validations passing.
+
+For example
+
+```
+
+# dog.rb
+
+class Dog
+  validates :breed, presence: true
+end
+
+
+# dogs_controller.rb
+
+
+def create
+
+  @dog = Dog.new(name: params[:name], breed: params[:breed])
+  if @dog.valid?
+    @dog.save
+    redirect_to dog_path(@dog)
+  else
+    # Flash allows you to display errors on the page
+    # It persists from one request to the next
+
+    flash[:errors] = @dog.errors.full_messages # gives you an array of error messages corresponding to the validations 9
+
+  end
+
+end
+
+
+# OR
+
+
+def create
+
+  @dog = Dog.new(name: params[:name], breed: params[:breed])
+  if @dog.save
+    @dog.save
+  else
+
+    flash[:errors] = @dog.errors.full_messages
+  end
+
+end
+```
+
+*Note* Walk students through a couple of the validations on the Rails Guides documentation and show them how to try new ones. It is helpful for them to see how easy this is. Reiterate that this not something you simply memorize but something you work on and get practice with.
+
+
+### Strong params
+
+This lecture is also a good opportunity to dive into strong params. Because of issues with mass assignment Rails does not allow you to initialize with params therefore you must use strong params
+
+
+```
+  def create
+    # Include validation...
+    @dog = Dog.create(dog_params)
+  end
+
+private
+  def dog_params
+    params.require(:dog).permit(:name, :breed)
+  end
+
+```
+It could also be cool to show students how the return of `dog_params`. Rails changes the params to `permitted:true`
+
+## References
+ * [Railsguides - AR Validations](http://guides.rubyonrails.org/active_record_validations.html)
+ 
 ---
 title: Rails Review
 layout: post
