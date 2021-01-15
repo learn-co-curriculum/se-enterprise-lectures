@@ -1055,6 +1055,184 @@ end
       * It can only be called on the implicit `self`
 
 ---
+title: Ruby One To Many Relationships
+layout: post
+---
+
+# <a id="many-to-many">ruby-one-to-many-relationships</a>
+
+## SWBATs
+
+* Implement one object to many objects relationship
+  * One object has many objects
+  * One object belongs to another object
+* Practice passing custom objects as arguments to methods
+* Demonstrate single source of truth
+* Infer type of method \(class or instance\) through naming conventions
+
+## Resources
+
+* [Example video](https://youtu.be/69PMa8I_P7E)
+* [Starter Code](https://github.com/learn-co-curriculum/lectures-starter-code/tree/master/ruby/one-to-many)
+  * This starter code has a `run.rb` file, so this is a good lecture to introduce a single point of entry for the app if you haven't already.
+  * If you choose not to use the starter code, it's an opportunity to ask the students to give you prompts and become more invested in the code.
+
+## Outline
+
+```text
+15m Introduce topic
+ 5m Introduce deliverables
+10m Build the classes
+10m Explore single source of truth
+10m Student exercise
+10m Review exercise
+10m More on objects and methods (optional)
+===
+70m Total
+```
+
+### Introduce topic
+
+* _Model_: A class whose primary responsibility is to store data
+* _Domain_: The subject matter of the problem, \(e.g., Learn's domain is online education\)
+* _Domain modeling_: Creating models for your domain to represent real or abstract ideas \(e.g., Learn's domain model includes modules, cohorts, assignments as well as their relationships\)
+* _Relationships_: How one model or thing is connected to another model or thing
+  * _One to many relationship_: A relationship describing a single model that contains or keeps track of other models \(a tree has many leaves, an organism has many cells, the universe has many galaxies\)
+  * _Many to many relationship_: Next time
+  * _Other relationships_: Next time
+
+_Why do we care so much about codifying and being really specific about the terminology of has-many/belongs-to?_ The terms are very powerful because we can use the same idea to describe relationships across many different types of domains. The relationship between artist and song, is the same as book and author, user and tweets, etc.
+
+I'll draw out some simple domain diagrams using [web whiteboard](https://awwapp.com/) or [draw.io](https://www.draw.io/)
+
+### Introduce deliverables
+
+```text
+* Create a User class. The class should have these methods:
+  * `User#initialize` which takes a username
+  * `User#username` reader method
+  * `User#tweets` that returns an array of Tweet instances
+  * `User#post_tweet` that takes a message, creates a new tweet, and adds it to the user's tweet collection
+* Create a Tweet class. The class should have these methods:
+  * `Tweet#message` that returns a string
+  * `Tweet#user` that returns an instance of the user class
+  * `Tweet.all` that returns all the Tweets created.
+  * `Tweet#username` that returns the username of the tweet's user
+```
+
+> **Note:** We are no longer in the world where something something like `song.artists` would return an array of strings of song names. We are now always favoring objects going forward. In this example, expect `user.tweets` to return a collection of _Tweet instances_
+
+### Build the classes
+
+Set up a `run.rb` file to be the _single point of entry_ for your application. This file should require the other two and you should run `ruby run.rb` in the terminal to test your application generally.
+
+Get outlines for classes in their own files, and write method definitions without method bodies at first. Start building the `User` class without a single source of truth.
+
+To test the code I'll make an example Twitter User. I show [coffee\_dad](https://twitter.com/coffee_dad). Nice short tweets to type such as 'having coffee'
+
+```ruby
+class User
+
+  attr_reader :username, :tweets
+
+  def initialize(usernmae)
+    @username = username
+    @tweets = [] # this is the idea that we will remove later
+  end
+
+  def post_tweet(message)
+    # create a new tweet
+    tweet = Tweet.new(message, self)
+    # add that tweet to this users collection of tweets
+    add_tweet(tweet)
+  end
+
+  private
+
+  def add_tweet(tweet)
+    self.tweets << tweet
+  end
+
+end
+
+class Tweet
+  attr_reader :message, :user
+
+  @@all = []
+
+  def initialize(message, user)
+    @message = message
+    @user = user
+
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+end
+```
+
+### Explore single source of truth
+
+Demonstrate why we want single source of truth...
+
+* Create a user and have that user post a few tweets.
+* Remove a tweet from `Tweet.all`.
+* Call `user.tweets` to see it's still there.
+
+There's not a single source of truth here. Does that tweet still belong to the user or not? Which class has the responsibility of knowing definitively which tweets exist. The Tweet class seems a better choice. Lets have that be the SSoT.
+
+### Student exercise
+
+> **Exercise** Allow the students to continue working on the deliverables provided at the beginning of the survey.
+
+### Review exercise
+
+After they get this the `post_tweet` method can be significantly simplified utilizing single source of truth. Talk a little bit about how SSoT relates to Ruby code but also foreshadow the use of relational databases, where SSoT really shines.
+
+```ruby
+class User
+  # ...
+
+  def tweets
+    Tweet.all.select do |tweet|
+      # Q: what would tweet.user.class return??
+      tweet.user == self
+    end
+  end
+
+  def post_tweet(message)
+    Tweet.new(self, message)
+  end
+end
+```
+
+### More on objects and methods
+
+* Implicit receivers
+  * ruby will try to send the method to `self` if it doesn't have a local variable
+  * Three types of things in Ruby
+    * data
+    * Ruby keywords
+    * bare words that are defined
+  * Where does puts come from?
+    * Module called 'Kernel' which communicates with printing to the screen - this method is defined there
+    * We're really calling 'self.puts'
+  * _Must use explicit receiver with = method_ -&gt; show why
+    * When you need the explicit receiver
+  * private methods
+    * Add additional methods to organize my code better
+    * Make it more readable
+    * Imagine a codebase with hundreds or thousands of files - you don't want other programmers to use those methods
+    * The method were just for readability
+    * Try to use them to make this read like a story
+    * What makes a method private?
+      * It can only be called on the implicit `self`
+
+
+
+---
 title: Ruby Has Many Through Review
 layout: post
 ---
