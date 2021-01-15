@@ -642,7 +642,7 @@ class DoctorController < ApplicationController
 end
 ```
 
-# <a id="forms">ActiveRecord Validations
+# <a id="forms-validations">ActiveRecord Validations</a>
 
 ## Objectives
 
