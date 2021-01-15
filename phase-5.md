@@ -2,7 +2,7 @@
 
 - [Redux Intro](#intro)
 - [Redux and React](#react-and-redux)
-- [Redux Thunk](#redux-thunk)
+- [Redux Thunk](#thunk)
 
 ## Lecture Notes
 
