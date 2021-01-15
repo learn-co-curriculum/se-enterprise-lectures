@@ -3,10 +3,9 @@
 - [Rails Intro](#intro)
 - [Rails Associations](#associations)
 - [Rails Forms REST](#forms-rest)
-- [Rails Forms Associations](#forms-associations)
 - [Rails Forms Validations](#forms-validations)
 - [Rails Forms Advanced](#forms-advanced)
-- [Rails Review](#rails-revew)
+- [Rails Review](#rails-review)
 - [Rails Sessions and Cookies](#sessions)
 - [Rails Authorization](#authentication)
 - [React JWT Auth 1](#jwt1)
@@ -766,14 +765,6 @@ layout: post
 * [Starter Code](https://github.com/learn-co-curriculum/lectures-starter-code/tree/master/rails/rails-review)
 
 #### Build a Full Crud Application
-
-
----
-title: Rails Form Associations
-layout: post
----
-
-
 
 
 # <a id="forms-validations">Rails Forms and Validations</a>
