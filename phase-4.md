@@ -1,7 +1,7 @@
 ### Phase 4
 
 - [Rails Intro](#intro)
-- [Rails Associations](#forms)
+- [Rails Associations](#associations)
 - [Rails Forms REST](#forms-rest)
 - [Rails Forms Associations](#forms-associations)
 - [Rails Forms Validations](#forms-validations)
@@ -328,7 +328,7 @@ Rome wasn't built in a day and neither can someone learn Rails in a day. Keep co
 
 [Rails Guides](http://guides.rubyonrails.org/index.html)
 
-# <a id="rails-associations">Rails Associations</a>
+# <a id="associations">Rails Associations</a>
 
 ## SWBATs
 
