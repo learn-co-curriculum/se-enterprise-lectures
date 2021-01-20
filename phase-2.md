@@ -1099,6 +1099,7 @@ layout: post
 * Recognize the most-used lifecyle methods
 
 ## Resources
+* [Example vid](https://youtu.be/ZSJ0LyjPr3g)
 * [React Docs](https://reactjs.org/docs/react-component.html#the-component-lifecycle)
 * [React Lifecycle Methods Diagram](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 * [Starter Code](https://github.com/learn-co-curriculum/lectures-starter-code/tree/master/react/react-lifecycle-starter-code)
